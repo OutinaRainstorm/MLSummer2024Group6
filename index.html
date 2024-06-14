@@ -1,1 +1,125 @@
-<h1>ML Summer 2024</h1>
+<h1>Group 6 Proposal Report</h1>
+<h2>1) Introduction</h2>
+<p>
+  &emsp; a) Literature Review <br>
+  &emsp; &emsp;   i)&emsp;Lu was concerned with flight prices as a time-series and <br>
+  &emsp;&emsp;&emsp;  &emsp;when to buy/wait. Lu found the AdaBoost-DecisionTree <br>
+  &emsp;&emsp;&emsp;  &emsp;algorithm had the best performance (61.35% than random <br>
+  &emsp;&emsp;&emsp;  &emsp;purchase strategy) over the eight routes examined; K-means <br>
+  &emsp;&emsp;&emsp;  &emsp;and EM to address outliers. <br>
+  &emsp; &emsp;ii) &emsp;S. Gupta and N. Gupta used <q>a combination of decision tree <br>
+  &emsp;&emsp;&emsp;  &emsp;algorithms, k Nearest Neighbors (KNN), and linear <br>
+  &emsp;&emsp;&emsp;  &emsp;regression</q> on historical trends to forecast flight prices. <br>
+  &emsp;&emsp;&emsp;  &emsp;Their Random Forest Regressor and Decision Tree Regressor <br>
+  &emsp;&emsp;&emsp;  &emsp;had r2 scores of .81 and .67 respectively. <br>
+  &emsp;&emsp;iii) &emsp;Tziridis et al. evaluated different regression models <br>
+  &emsp;&emsp;&emsp;  &emsp;including random forests and support vector machines on a <br>
+  &emsp;&emsp;&emsp;  &emsp;dataset of over 1,000 flights, focusing on how departure time <br>
+  &emsp;&emsp;&emsp;  &emsp;and the number of stops a given flight had would impact the <br>
+  &emsp;&emsp;&emsp;  &emsp;prediction accuracy. They found that the bagging regression <br>
+  &emsp;&emsp;&emsp;  &emsp;tree model had the highest accuracy of 87.42%. <br>
+  &emsp; b) Dataset Description <br>
+  &emsp; &emsp;   i)&emsp;The data will contain prices of flights over time, consisting <br>
+  &emsp;&emsp;&emsp;  &emsp;of fixed destinations and dates. For example, we will only <br>
+  &emsp;&emsp;&emsp;  &emsp;consider specific flights from ATL to LAX, NY, and CUN <br>
+  &emsp;&emsp;&emsp;  &emsp;(popular destinations) and focus on dates when flights are <br>
+  &emsp;&emsp;&emsp;  &emsp;popular (Thanksgiving, Christmas, etc.). <br>
+  &emsp; c) Dataset Link: Data will be scraped from Google Flights. 
+</p>
+<h2>2) Problem Description and Motivation</h2>
+<p>
+  Knowing when to buy flight tickets is tricky as they fluctuate seemingly <br>unpredictably.
+  Our objective is to produce a model that can predict how <br>far in advance one should purchase a flight ticket.
+</p>
+<h2>3) Methods</h2>
+<p>
+  &emsp; a) Preprocessing methods <br>
+  &emsp; &emsp;   i)&emsp;One Hot Encoding can/will be a way for us to turn certain <br>
+  &emsp;&emsp;&emsp;  &emsp;features into numerical data. Some features that could <br>
+  &emsp;&emsp;&emsp;  &emsp;benefit from this are the Airline name, and departure and <br>
+  &emsp;&emsp;&emsp;  &emsp;arrival locations. <br>
+  &emsp; &emsp;ii) &emsp;Standard Scaling can be used to normalize the data. Standard <br>
+  &emsp;&emsp;&emsp;  &emsp;scaling makes sure features are transformed such that they <br>
+  &emsp;&emsp;&emsp;  &emsp;have a mean of 0 and a standard deviation of 1. This prevents <br>
+  &emsp;&emsp;&emsp;  &emsp;any single feature from over influencing the model <br>
+  &emsp;&emsp;iii) &emsp;Polynomial Features is also beneficial to flight price <br>
+  &emsp;&emsp;&emsp;  &emsp;prediction as there might not be a linear relationship <br>
+  &emsp;&emsp;&emsp;  &emsp;between features and the flight prices. Polynomial features <br>
+  &emsp;&emsp;&emsp;  &emsp;allows us to make the label dependent on several features <br>
+  &emsp;&emsp;&emsp;  &emsp;like flight duration, arrival destination, and the flight date. <br>
+  &emsp; b) ML Algorithms/Models <br>
+  &emsp;  &emsp;  i) &emsp;K Means Clustering<br>
+  &emsp; &emsp; ii) &emsp;Hierarchical Clustering<br>
+  &emsp; &emsp;iii) &emsp;GMM<br>
+  &emsp; &emsp;iv) &emsp;Hidden Markov Models<br>
+  &emsp; &emsp;  v) &emsp;Singular Value Decomposition<br>
+  &emsp; &emsp;vi) &emsp;General Adversarial Networks<br>
+  &emsp;&emsp;vii) &emsp;Principle Component Analysis<br>
+  &emsp; c) Supervised Learning methods <br>
+  &emsp;  &emsp;  i) &emsp;Random Forest Regressor<br>
+  &emsp; &emsp; ii) &emsp;Decision Tree Regressor<br>
+  &emsp; &emsp;iii) &emsp;Support Vector Regressor<br>
+  &emsp; &emsp;iv) &emsp;Decision Tree <br>
+  &emsp; &emsp;  v) &emsp;AdaBoost<br>
+  &emsp; &emsp;vi) &emsp;Bagging Regression Trees
+</p>
+<h2>4) Results and Discussion</h2>
+<p>
+  &emsp; a) Quantitative Metrics <br>
+  &emsp; &emsp;  1.&emsp;Price of plane tickets <br>
+  &emsp; &emsp;  2.&emsp;Days before departure<br>
+  &emsp; &emsp;  3.&emsp;Additional costs such as checked baggage <br>
+  &emsp; b) Project Goals <br>
+  &emsp; &emsp;   i)&emsp;Identify how many days before departure one should book <br>
+  &emsp;&emsp;&emsp;  &emsp;flights from Atlanta based on destination, date of travel, and <br>
+  &emsp;&emsp;&emsp;  &emsp;personal customer preferences like (baggage, airline, etc.) in <br>
+  &emsp;&emsp;&emsp;  &emsp;order to minimize the price of the plane ticket. <br>
+  &emsp; &emsp;ii) &emsp;Determine during what seasons are prices of plane tickets <br>
+  &emsp;&emsp;&emsp;  &emsp;the cheapest.<br>
+  &emsp; c) Expected Results <br>
+  &emsp;&emsp; We expect that prices of plane tickets are most expensive a month<br>
+  &emsp;&emsp; before the date of departure. Prices should be cheapest several <br>
+  &emsp;&emsp; months before the date of departure, but not immediately after the<br>
+  &emsp;&emsp; flight&apos;s posting. <br>
+</p>
+<h2>5) References</h2>
+<p>
+[1] J. Lu, <q>Machine learning modeling for time series problem: Predicting <br>
+  &emsp; flight ticket prices,</q> arXiv.org, https://arxiv.org/abs/1705.07205 <br>
+  &emsp; (accessed Jun. 11, 2024). <br>
+[2] S. Gupta and N. Gupta, Flight fare prediction using machine learning, <br>
+  &emsp; https://www.researchgate.net/publication/380296130_Flight_Fare_Pr<br>
+  &emsp; ediction_Using_Machine_Learning (accessed Jun. 11, 2024).<br>
+[3] K. Tziridis, Th. Kalampokas, G. A. Papakostas, and K. I. Diamantaras, <br>
+  &emsp; Airfare prices prediction using Machine Learning Techniques, <br>
+  &emsp; https://ieeexplore.ieee.org/document/8081365/ (accessed Jun. 11, 2024).
+</p>
+<h2>Gantt Chart</h2>
+<a href="https://docs.google.com/spreadsheets/d/1p2POTEbhSWqfBzq0sjRmW3fbHE6IvLSu8YKhsBswh4A/edit?gid=1989857755#gid=1989857755">Gantt Chart</a>
+<h2>Contribution Table</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Proposal Contributions</th>
+  </tr>
+  <tr>
+    <td>Francesco Cascone</td>
+    <td>Gathering References, Writing the report</td>
+  </tr>
+    <tr>
+    <td>William Hudson</td>
+    <td>Video Presentation</td>
+  </tr>
+    <tr>
+    <td>Viabhav Patel</td>
+    <td>Gathering References, Writing the report</td>
+  </tr>
+    <tr>
+    <td>Matthew Spenney</td>
+    <td>Github Respository, Github Pages</td>
+  </tr>
+    <tr>
+    <td>Jonathan Zhang</td>
+    <td>Writing the report</td>
+  </tr>
+</table>
