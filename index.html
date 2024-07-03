@@ -44,34 +44,26 @@
 <h2>3) Methods</h2>
 <p>
   &emsp; a) Preprocessing methods <br>
-  &emsp; &emsp;   i)&emsp;One Hot Encoding can/will be a way for us to turn certain <br>
-  &emsp;&emsp;&emsp;  &emsp;features into numerical data. Some features that could <br>
-  &emsp;&emsp;&emsp;  &emsp;benefit from this are the Airline name, and departure and <br>
-  &emsp;&emsp;&emsp;  &emsp;arrival locations. <br>
-  &emsp; &emsp;ii) &emsp;Standard Scaling can be used to normalize the data. Standard <br>
-  &emsp;&emsp;&emsp;  &emsp;scaling makes sure features are transformed such that they <br>
-  &emsp;&emsp;&emsp;  &emsp;have a mean of 0 and a standard deviation of 1. This prevents <br>
-  &emsp;&emsp;&emsp;  &emsp;any single feature from over influencing the model <br>
-  &emsp;&emsp;iii) &emsp;Polynomial Features is also beneficial to flight price <br>
-  &emsp;&emsp;&emsp;  &emsp;prediction as there might not be a linear relationship <br>
-  &emsp;&emsp;&emsp;  &emsp;between features and the flight prices. Polynomial features <br>
-  &emsp;&emsp;&emsp;  &emsp;allows us to make the label dependent on several features <br>
-  &emsp;&emsp;&emsp;  &emsp;like flight duration, arrival destination, and the flight date. <br>
-  &emsp; b) ML Algorithms/Models <br>
-  &emsp;  &emsp;  i) &emsp;K Means Clustering<br>
-  &emsp; &emsp; ii) &emsp;Hierarchical Clustering<br>
-  &emsp; &emsp;iii) &emsp;GMM<br>
-  &emsp; &emsp;iv) &emsp;Hidden Markov Models<br>
-  &emsp; &emsp;  v) &emsp;Singular Value Decomposition<br>
-  &emsp; &emsp;vi) &emsp;General Adversarial Networks<br>
-  &emsp;&emsp;vii) &emsp;Principle Component Analysis<br>
-  &emsp; c) Supervised Learning methods <br>
-  &emsp;  &emsp;  i) &emsp;Random Forest Regressor<br>
-  &emsp; &emsp; ii) &emsp;Decision Tree Regressor<br>
-  &emsp; &emsp;iii) &emsp;Support Vector Regressor<br>
-  &emsp; &emsp;iv) &emsp;Decision Tree <br>
-  &emsp; &emsp;  v) &emsp;AdaBoost<br>
-  &emsp; &emsp;vi) &emsp;Bagging Regression Trees
+  &emsp; &emsp;   i)&emsp; Visualization<br>
+  &emsp;&emsp;&emsp;  &emsp; For each flight, a data point was created containing a column of ticket prices<br>
+  &emsp;&emsp;&emsp;  &emsp; and a column containing the number of days. This matrix was used to create a<br>
+  &emsp;&emsp;&emsp;  &emsp; scatterplot of prices over different number of days befor the plane's departure<br>
+  &emsp; &emsp;ii) &emsp; Removing Outliers<br>
+  &emsp;&emsp;&emsp;  &emsp; After visualizing the data, some of the scatterplots showed signs of outliers.<br>
+  &emsp;&emsp;&emsp;  &emsp; We created a replica of the data with outliers removed. This creates gaps in the data,<br>
+  &emsp;&emsp;&emsp;  &emsp; but keeps the average flight price from becoming skewed, especially by high prices.<br>
+   &emsp;&emsp;&emsp;  &emsp; This is important for accurately finding less than average prices<br>
+  &emsp;&emsp;iii) &emsp; Normalization<br>
+  &emsp;&emsp;&emsp;  &emsp; The range of flight prices vary depending on the flight. To compare the patterns<br>
+  &emsp;&emsp;&emsp;  &emsp; of flight prices between different flights, the flight prices were normalized.<br>
+  &emsp;&emsp;&emsp;  &emsp; Because of normalization, expensive flight prices are known to be close to 1,<br>
+  &emsp;&emsp;&emsp;  &emsp; and inexpensive flight prices are known to be close to 0 regardless of flight.<br>
+  &emsp; b) Supervised Learning methods <br>
+  &emsp;  &emsp;  i) &emsp;Random Tree Regression
+  &emsp;&emsp;&emsp;  &emsp; Random Tree Regression was chosen as the first machine learning model<br>
+  &emsp;&emsp;&emsp;  &emsp; because it showed the best results according to previous research into <br>
+  &emsp;&emsp;&emsp;  &emsp; flight price prediction. It was also reccommended as being a good introductory<br>
+  &emsp;&emsp;&emsp;  &emsp; supervised learning method. <br>
 </p>
 <h2>4) Results and Discussion</h2>
 <p>
@@ -110,27 +102,27 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Proposal Contributions</th>
+    <th>Midterm Contributions</th>
   </tr>
   <tr>
     <td> Francesco Cascone </td>
-    <td> Gathering References, Writing the report </td>
+    <td> Preprocessing and Visualizing Data </td>
   </tr>
   <tr>
     <td> William Hudson </td>
-    <td> Video Presentation </td>
+    <td> TO DO </td>
   </tr>
   <tr>
     <td> Viabhav Patel </td>
-    <td> Gathering References, Writing the report </td>
+    <td> TO DO </td>
   </tr>
   <tr>
     <td> Matthew Spenney </td>
-    <td> Github Respository, Github Pages </td>
+    <td> Github Pages </td>
   </tr>
   <tr>
     <td> Jonathan Zhang </td>
-    <td> Writing the report </td>
+    <td> TO DO </td>
   </tr>
 </table>
 </body>
