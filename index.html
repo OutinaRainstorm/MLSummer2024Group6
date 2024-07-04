@@ -72,21 +72,28 @@
 </p>
 <h2>4) Results and Discussion</h2>
 <p>
-  &emsp; a) Random Tree Regression<br>
-  &emsp; &emsp;   i)&emsp;After the first run of Random Tree Regression the mean squared error<br>
-  &emsp;&emsp;&emsp;  &emsp;was about 0.0259. Many of the predicted flight prices in the visualiztion<br>
-  &emsp;&emsp;&emsp;  &emsp;aligned with their actual value. Despite this, the model failed to capture<br>
-  &emsp;&emsp;&emsp;  &emsp;the sudden decrease then increase in price. It predicted an increase when price<br>
-  &emsp;&emsp;&emsp;  &emsp;dropped to the lowest.<br>
-  &emsp; &emsp;ii) &emsp;After the first run of Random Tree Regression the mean squared error<br>
-  &emsp;&emsp;&emsp;  &emsp;was about 0.0259.<br>
-  &emsp; b) Deep Neural Network<br>
-  &emsp; &emsp;   i)&emsp;Identify how many days before departure one should book <br>
-  &emsp;&emsp;&emsp;  &emsp;flights from Atlanta based on destination, date of travel, and <br>
-  &emsp;&emsp;&emsp;  &emsp;personal customer preferences like (baggage, airline, etc.) in <br>
-  &emsp;&emsp;&emsp;  &emsp;order to minimize the price of the plane ticket. <br>
-  &emsp; &emsp;ii) &emsp;Determine during what seasons are prices of plane tickets <br>
-  &emsp;&emsp;&emsp;  &emsp;the cheapest.<br>
+  &emsp; a) Results from Supervized Learning algorithms <br>
+  &emsp;  &emsp;  i) &emsp;Random Tree Regression<br>
+  &emsp;&emsp;&emsp;  &emsp; As shown in the visualization, running Random Forest Regression on the testing<br>
+  &emsp;&emsp;&emsp;  &emsp; flights caused the model to predict the flight price would stay around the same<br>
+  &emsp;&emsp;&emsp;  &emsp; price. This is not a helpful prediction because it is not picking up the changes<br>
+  &emsp;&emsp;&emsp;  &emsp; in price we see for individual flights. This is happening because ticket prices<br>
+  &emsp;&emsp;&emsp;  &emsp; with respect to days till departure follows a different function for each flight.<br>
+  &emsp;&emsp;&emsp;  &emsp; The prices for some flights increase, while the price for other flights decrease, so<br>
+  &emsp;&emsp;&emsp;  &emsp; the algorithm tries to optimize this behavior by predicting the price at the average.<br>
+  &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
+  &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
+  &emsp;&emsp;&emsp;  &emsp; Overall the model was able to quickly converge with a fairly stagnant training loss<br>
+  &emsp;&emsp;&emsp;  &emsp; after very few epochs a certain complexity of model, and deep neural networks are able to present <br>
+  &emsp;&emsp;&emsp;  &emsp;Overall the validation error shows that the issue being faced <br>
+  &emsp;&emsp;&emsp;  &emsp;is not under/over fitting, rather that the issue is inherent <br>
+  &emsp;&emsp;&emsp;  &emsp; to the methodology and the problem being faced.
+  &emsp;  &emsp;iii) &emsp;Discussion<br>
+  &emsp;&emsp;&emsp;  &emsp;A different approach needs to be applied because the optimization did not lead<br>
+  &emsp;&emsp;&emsp;  &emsp;to a prediction other than the average. This leads us to believe that we would benefit<br>
+  &emsp;&emsp;&emsp;  &emsp;from creating a model that predicts the rest of the flight price distribution given<br>
+  &emsp;&emsp;&emsp;  &emsp;part of the distribution many days in advance. This way the algorithm can make a prediction<br>
+  &emsp;&emsp;&emsp;  &emsp;using flight prices that follow a similar function far before the departure date.<br>
 <h2>Visualiztion of Random Tree Predicted Prices Compared to original</h2>
 <img src="./randomForest.png" title="Random Tree Prediction"><br>
   
