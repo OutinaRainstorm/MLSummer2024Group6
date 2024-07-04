@@ -81,6 +81,8 @@
   &emsp;&emsp;&emsp;  &emsp; with respect to days till departure follows a different function for each flight.<br>
   &emsp;&emsp;&emsp;  &emsp; The prices for some flights increase, while the price for other flights decrease, so<br>
   &emsp;&emsp;&emsp;  &emsp; the algorithm tries to optimize this behavior by predicting the price at the average.<br>
+  &emsp;&emsp;&emsp;  &emsp; Our R^2 value is: -0.02, our (non-normalized) MSE is 2919, or in other words the typical error<br>
+  &emsp;&emsp;&emsp;  &emsp; is 54 dollars.<br>
   &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
   &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
   &emsp;&emsp;&emsp;  &emsp; Overall the model was able to quickly converge with a fairly stagnant training loss<br>
@@ -88,7 +90,8 @@
   &emsp;&emsp;&emsp;  &emsp;Overall the validation error shows that the issue being faced <br>
   &emsp;&emsp;&emsp;  &emsp;is not under/over fitting, rather that the issue is inherent <br>
   &emsp;&emsp;&emsp;  &emsp; to the methodology and the problem being faced.
-  &emsp;  &emsp;iii) &emsp;Discussion<br>
+  &emsp;&emsp;&emsp;  &emsp; Our R^2 is 0.01, MSE (non-normalized) is 2837 so our values vary by about 53 dollars.
+  &emsp;  &emsp;iii) &emsp;Next Steps<br>
   &emsp;&emsp;&emsp;  &emsp;A different approach needs to be applied because the optimization did not lead<br>
   &emsp;&emsp;&emsp;  &emsp;to a prediction other than the average. This leads us to believe that we would benefit<br>
   &emsp;&emsp;&emsp;  &emsp;from creating a model that predicts the rest of the flight price distribution given<br>
