@@ -8,7 +8,7 @@
   </style>
 </head>
 <body>
-<h1>Group 6 Midterm Report</h1>
+<h1>Group 6 Final Report</h1>
 <h2>1) Introduction</h2>
 <p>
   &emsp; a) Literature Review <br>
@@ -36,8 +36,8 @@
 </p>
 <h2>2) Problem Description and Motivation</h2>
 <p>
-  Knowing when to buy flight tickets is tricky as they fluctuate seemingly <br>unpredictably.
-  Our objective is to produce a model that can predict how <br>far in advance one should purchase a flight ticket.
+  The distribution of flight prices is inherently non-linear and does not follow an easily predictable distribution. The goal of this paper is to create a machine learning approach to the problem of the distributions of ticket flight prices when given partial information about the distribution. In other words, by giving an earlier part of the distribution, the latter part of the distribution will be predicted allowing for educated choices on when to purchase a flight ticket at the cheapest time.
+
 </p>
 <h2>3) Methods</h2>
 <p>
@@ -51,24 +51,43 @@
   &emsp;&emsp;&emsp;  &emsp; We created a replica of the data with outliers removed. This creates gaps in the data,<br>
   &emsp;&emsp;&emsp;  &emsp; but keeps the average flight price from becoming skewed, especially by high prices.<br>
    &emsp;&emsp;&emsp;  &emsp; This is important for accurately finding less than average prices<br>
-  &emsp;&emsp;iii) &emsp; Normalization<br>
-  &emsp;&emsp;&emsp;  &emsp; The range of flight prices vary depending on the flight. To compare the patterns<br>
-  &emsp;&emsp;&emsp;  &emsp; of flight prices between different flights, the flight prices were normalized.<br>
-  &emsp;&emsp;&emsp;  &emsp; Because of normalization, expensive flight prices are known to be close to 1,<br>
-  &emsp;&emsp;&emsp;  &emsp; and inexpensive flight prices are known to be close to 0 regardless of flight.<br>
   <h2>Flight Price with Respect to Days Before Departure</h2><br>
   <img src="./docs/assets/css/Screenshot_3-7-2024_8394_colab.research.google.png" title="Data vs. Processed Data" width="75%" height="75%"><br><br>
   &emsp; b) Supervised Learning methods <br>
-  &emsp;  &emsp;  i) &emsp;Random Tree Regression<br>
-  &emsp;&emsp;&emsp;  &emsp; Random Tree Regression was chosen as the first machine learning model<br>
-  &emsp;&emsp;&emsp;  &emsp; because it showed the best results according to previous research into <br>
-  &emsp;&emsp;&emsp;  &emsp; flight price prediction. It was also reccommended as being a good introductory<br>
-  &emsp;&emsp;&emsp;  &emsp; supervised learning method. <br>
-  &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
-  &emsp;&emsp;&emsp;  &emsp; Deep Neural Network was selected as a second choice due to the number of datapoints present,<br>
-  &emsp;&emsp;&emsp;  &emsp; minimizing the chance of overfitting; The inherent complexity inside of the model require<br>
-  &emsp;&emsp;&emsp;  &emsp;a certain complexity of model, and deep neural networks are able to present <br>
-  &emsp;&emsp;&emsp;  &emsp;a level of complexity to appropriately model the problem.  <br>
+  &emsp;  &emsp;  i) &emsp;Direct Architecture<br>
+  &emsp;&emsp;&emsp;  &emsp; This architecture takes the direct approach to the problem, taking each of the days  <br>
+  &emsp;&emsp;&emsp;  &emsp; inside of the prior distribution as a feature to predict the remaining days inside of the  <br>
+  &emsp;&emsp;&emsp;  &emsp; distribution as an output. Thus if one wished to predict the distribution using the <br>
+  &emsp;&emsp;&emsp;  &emsp; information up to 33 days from the flight, then each one of those 22 days will be a  <br>
+  &emsp;&emsp;&emsp;  &emsp; feature, with 31 outputs. This approach however suffers from the fact that with only 95  <br>
+  &emsp;&emsp;&emsp;  &emsp; data points in total there exists a great deal of features compared to data points. In this   <br>
+  &emsp;&emsp;&emsp;  &emsp; implementation various different algorithms were attempted with those being Multi-level    <br>
+  &emsp;&emsp;&emsp;  &emsp; perceptron regressor, Random Forest Regressor, and Linear Regression with polynomial    <br>
+  &emsp;&emsp;&emsp;  &emsp; features and Lasso regularization.    <br>
+  &emsp;  &emsp; ii) &emsp;Iterative Architecture<br>
+  &emsp;&emsp;&emsp;  &emsp; This architecture attempts to understand the relationships between the points in an<br>
+  &emsp;&emsp;&emsp;  &emsp; iterative manner, by the assumption that if one has the prices from days 33 to 55, then <br>
+  &emsp;&emsp;&emsp;  &emsp; predicting the price on day 32 would be ‘easier’ compared to predicting the entire <br>
+  &emsp;&emsp;&emsp;  &emsp; distribution at one time. Thus this approach trains multiple models with a step of 1 day <br>
+  &emsp;&emsp;&emsp;  &emsp; until reaching the endpoint (day 3), progressively increasing the number of days in the X <br>
+  &emsp;&emsp;&emsp;  &emsp; set in the form of adding a new feature. Overall this architecture has the major drawback <br>
+  &emsp;&emsp;&emsp;  &emsp; of requiring a different model to understand the relationship between each point and the <br>
+  &emsp;&emsp;&emsp;  &emsp; points prior to it, which can make this approach much more expensive compared to the <br>
+  &emsp;&emsp;&emsp;  &emsp; direct approach. In the implementation of this architecture Random Forest Regressor<br>
+  &emsp;&emsp;&emsp;  &emsp; and Multi-level perceptron versions were used.<br>
+   &emsp;  &emsp; iii) &emsp;Iterative Architecture with Soft-Clustering<br>
+  &emsp;&emsp;&emsp;  &emsp; This architecture uses the iterative architecture, however in addition to each model there <br>
+  &emsp;&emsp;&emsp;  &emsp; is an unsupervised soft-classification scheme (Gaussian Mixture Model in this case) <br>
+  &emsp;&emsp;&emsp;  &emsp; which was trained to recognize different types of distributions. For each one of these <br>
+  &emsp;&emsp;&emsp;  &emsp; gaussians, a separate random forest regressor model was fitted, resulting in 3 random <br>
+  &emsp;&emsp;&emsp;  &emsp; forest models per step. By taking a weighted average for each point using the <br>
+  &emsp;&emsp;&emsp;  &emsp; confidence percentages for each gaussian using the current X, this method promises <br>
+  &emsp;&emsp;&emsp;  &emsp; greater understanding compared to simply using the iterative approach as it will use the <br>
+  &emsp;&emsp;&emsp;  &emsp; soft-clustering understanding of distributions alongside the supervised learning <br>
+  &emsp;&emsp;&emsp;  &emsp; predictive elements to create an ideal model at the  cost to performance given the fact <br>
+  &emsp;&emsp;&emsp;  &emsp; that for each step a GMM will need to be fitted, alongside 3 Random Forest <br>
+  &emsp;&emsp;&emsp;  &emsp; Regressions.<br>
+
 </p>
 <h2>4) Results and Discussion</h2>
 <p>
