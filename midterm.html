@@ -1,0 +1,169 @@
+<html>
+<head>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<h1>Group 6 Midterm Report</h1>
+<h2>1) Introduction</h2>
+<p>
+  &emsp; a) Literature Review <br>
+  &emsp; &emsp;   i)&emsp;Lu was concerned with flight prices as a time-series and <br>
+  &emsp;&emsp;&emsp;  &emsp;when to buy/wait. Lu found the AdaBoost-DecisionTree <br>
+  &emsp;&emsp;&emsp;  &emsp;algorithm had the best performance (61.35% than random <br>
+  &emsp;&emsp;&emsp;  &emsp;purchase strategy) over the eight routes examined; K-means <br>
+  &emsp;&emsp;&emsp;  &emsp;and EM to address outliers. <br>
+  &emsp; &emsp;ii) &emsp;S. Gupta and N. Gupta used <q>a combination of decision tree <br>
+  &emsp;&emsp;&emsp;  &emsp;algorithms, k Nearest Neighbors (KNN), and linear <br>
+  &emsp;&emsp;&emsp;  &emsp;regression</q> on historical trends to forecast flight prices. <br>
+  &emsp;&emsp;&emsp;  &emsp;Their Random Forest Regressor and Decision Tree Regressor <br>
+  &emsp;&emsp;&emsp;  &emsp;had r2 scores of .81 and .67 respectively. <br>
+  &emsp;&emsp;iii) &emsp;Tziridis et al. evaluated different regression models <br>
+  &emsp;&emsp;&emsp;  &emsp;including random forests and support vector machines on a <br>
+  &emsp;&emsp;&emsp;  &emsp;dataset of over 1,000 flights, focusing on how departure time <br>
+  &emsp;&emsp;&emsp;  &emsp;and the number of stops a given flight had would impact the <br>
+  &emsp;&emsp;&emsp;  &emsp;prediction accuracy. They found that the bagging regression <br>
+  &emsp;&emsp;&emsp;  &emsp;tree model had the highest accuracy of 87.42%. <br>
+  &emsp; b) Dataset Description <br>
+  &emsp; &emsp;   i)&emsp;The data will contain prices of flights over time, consisting <br>
+  &emsp;&emsp;&emsp;  &emsp;of fixed destinations and dates. The data contains information <br>
+  &emsp;&emsp;&emsp;  &emsp;for United Airfare flight SFO-LAX <br>
+  &emsp; c) Dataset Link: <a href="https://www.kaggle.com/code/andrewrliu/airfare-predictor-pt-1/input">Airfare Predictor (pt.1)</a>
+</p>
+<h2>2) Problem Description and Motivation</h2>
+<p>
+  Knowing when to buy flight tickets is tricky as they fluctuate seemingly <br>unpredictably.
+  Our objective is to produce a model that can predict how <br>far in advance one should purchase a flight ticket.
+</p>
+<h2>3) Methods</h2>
+<p>
+  &emsp; a) Preprocessing methods <br>
+  &emsp; &emsp;   i)&emsp; Visualization<br>
+  &emsp;&emsp;&emsp;  &emsp; For each flight, a data point was created containing a column of ticket prices<br>
+  &emsp;&emsp;&emsp;  &emsp; and a column containing the number of days. This matrix was used to create a<br>
+  &emsp;&emsp;&emsp;  &emsp; scatterplot of prices over different number of days befor the plane's departure<br>
+  &emsp; &emsp;ii) &emsp; Removing Outliers<br>
+  &emsp;&emsp;&emsp;  &emsp; After visualizing the data, some of the scatterplots showed signs of outliers.<br>
+  &emsp;&emsp;&emsp;  &emsp; We created a replica of the data with outliers removed. This creates gaps in the data,<br>
+  &emsp;&emsp;&emsp;  &emsp; but keeps the average flight price from becoming skewed, especially by high prices.<br>
+   &emsp;&emsp;&emsp;  &emsp; This is important for accurately finding less than average prices<br>
+  &emsp;&emsp;iii) &emsp; Normalization<br>
+  &emsp;&emsp;&emsp;  &emsp; The range of flight prices vary depending on the flight. To compare the patterns<br>
+  &emsp;&emsp;&emsp;  &emsp; of flight prices between different flights, the flight prices were normalized.<br>
+  &emsp;&emsp;&emsp;  &emsp; Because of normalization, expensive flight prices are known to be close to 1,<br>
+  &emsp;&emsp;&emsp;  &emsp; and inexpensive flight prices are known to be close to 0 regardless of flight.<br>
+  <h2>Flight Price with Respect to Days Before Departure</h2><br>
+  <img src="./docs/assets/css/Screenshot_3-7-2024_8394_colab.research.google.png" title="Data vs. Processed Data" width="75%" height="75%"><br><br>
+  &emsp; b) Supervised Learning methods <br>
+  &emsp;  &emsp;  i) &emsp;Random Tree Regression<br>
+  &emsp;&emsp;&emsp;  &emsp; Random Tree Regression was chosen as the first machine learning model<br>
+  &emsp;&emsp;&emsp;  &emsp; because it showed the best results according to previous research into <br>
+  &emsp;&emsp;&emsp;  &emsp; flight price prediction. It was also reccommended as being a good introductory<br>
+  &emsp;&emsp;&emsp;  &emsp; supervised learning method. <br>
+  &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
+  &emsp;&emsp;&emsp;  &emsp; Deep Neural Network was selected as a second choice due to the number of datapoints present,<br>
+  &emsp;&emsp;&emsp;  &emsp; minimizing the chance of overfitting; The inherent complexity inside of the model require<br>
+  &emsp;&emsp;&emsp;  &emsp;a certain complexity of model, and deep neural networks are able to present <br>
+  &emsp;&emsp;&emsp;  &emsp;a level of complexity to appropriately model the problem.  <br>
+</p>
+<h2>4) Results and Discussion</h2>
+<p>
+  &emsp; a) Results from Supervized Learning algorithms <br>
+  &emsp;  &emsp;  i) &emsp;Random Tree Regression<br>
+  &emsp;&emsp;&emsp;  &emsp; As shown in the visualization, running Random Forest Regression on the testing<br>
+  &emsp;&emsp;&emsp;  &emsp; flights caused the model to predict the flight price would stay around the same<br>
+  &emsp;&emsp;&emsp;  &emsp; price. This is not a helpful prediction because it is not picking up the changes<br>
+  &emsp;&emsp;&emsp;  &emsp; in price we see for individual flights. This is happening because ticket prices<br>
+  &emsp;&emsp;&emsp;  &emsp; with respect to days till departure follows a different function for each flight.<br>
+  &emsp;&emsp;&emsp;  &emsp; The prices for some flights increase, while the price for other flights decrease, so<br>
+  &emsp;&emsp;&emsp;  &emsp; the algorithm tries to optimize this behavior by predicting the price at the average.<br>
+  &emsp;&emsp;&emsp;  &emsp; Our R^2 value is: -0.02, our (non-normalized) MSE is 2919, or in other words the typical error<br>
+  &emsp;&emsp;&emsp;  &emsp; is 54 dollars. <br>
+
+  
+  &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
+  &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
+  &emsp;&emsp;&emsp;  &emsp; Overall the model was able to quickly converge with a fairly stagnant training loss<br>
+  &emsp;&emsp;&emsp;  &emsp; after very few epochs a certain complexity of model, and deep neural networks are able to present <br>
+  &emsp;&emsp;&emsp;  &emsp;Overall the validation error shows that the issue being faced <br>
+  &emsp;&emsp;&emsp;  &emsp;is not under/over fitting, rather that the issue is inherent <br>
+  &emsp;&emsp;&emsp;  &emsp; to the methodology and the problem being faced.<br>
+  &emsp;&emsp;&emsp;  &emsp; Our R^2 is 0.01, MSE (non-normalized) is 2837 so our values vary by about 53 dollars.<br>
+  &emsp;&emsp;&emsp;  &emsp;The accuracy score within $30, as for the Random Tree Regression, was 0.367.<br><br>
+  &emsp;  &emsp;  b) &emsp;Next Steps<br>
+  &emsp;&emsp;&emsp;  &emsp;These results suggest that we should attempt a different approach. Rather <br>
+  &emsp;&emsp;&emsp;  &emsp;than producing a model predicts the ticket price given only the number of days <br>
+  &emsp;&emsp;&emsp;  &emsp;in advance of the ticket purchase, we will try to produce a model that can  <br>
+  &emsp;&emsp;&emsp;  &emsp;predict the rest of the distribution of ticket prices given some of the data. <br>
+  &emsp;&emsp;&emsp;  &emsp;That is, we want to create a model trained on a subset of the 95 flight distributions <br>
+  &emsp;&emsp;&emsp;  &emsp;that can predict a new flight distribution based on some information about the new <br>
+  &emsp;&emsp;&emsp;  &emsp;flight distribution. For example, given the ticket prices of a new flight for, say, <br>
+  &emsp;&emsp;&emsp;  &emsp;35-57 days in advance, the model should be able to predict how the rest of the <br>
+  &emsp;&emsp;&emsp;  &emsp;distribution will look like with certain probability.  <br>
+ <br>
+  &emsp;&emsp;&emsp;  &emsp;This would still be practical for a customer that tracks flight  <br>
+  &emsp;&emsp;&emsp;  &emsp;prices 35-57 days in advance (which could be done with a web scraper)  <br>
+  &emsp;&emsp;&emsp;  &emsp;as they could obtain a prediction for when the prices would be cheapest. <br>
+  &emsp;&emsp;&emsp;  &emsp;The customer could even run the model every day, feeding it one more data <br>
+  &emsp;&emsp;&emsp;  &emsp;point every successive day which would enable a more accurate prediction <br>
+
+<h2>Visualiztion of Random Tree Predicted Prices Compared to original</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
+  
+<h2>Visualization for DNN Model</h2>
+<img src="./DNN_2Results.png" title="DNN Visualization"><br>
+<img src="./DNN_2Loss.png" title="DNN Loss during Optimization">
+</p>
+<h2>5) References</h2>
+<p>
+[1] J. Lu, <q>Machine learning modeling for time series problem: Predicting <br>
+  &emsp; flight ticket prices,</q> arXiv.org, https://arxiv.org/abs/1705.07205 <br>
+  &emsp; (accessed Jun. 11, 2024). <br>
+[2] S. Gupta and N. Gupta, Flight fare prediction using machine learning, <br>
+  &emsp; https://www.researchgate.net/publication/380296130_Flight_Fare_Pr<br>
+  &emsp; ediction_Using_Machine_Learning (accessed Jun. 11, 2024).<br>
+[3] K. Tziridis, Th. Kalampokas, G. A. Papakostas, and K. I. Diamantaras, <br>
+  &emsp; Airfare prices prediction using Machine Learning Techniques, <br>
+  &emsp; https://ieeexplore.ieee.org/document/8081365/ (accessed Jun. 11, 2024).
+</p>
+<h2>Gantt Chart</h2>
+<a href="https://docs.google.com/spreadsheets/d/1p2POTEbhSWqfBzq0sjRmW3fbHE6IvLSu8YKhsBswh4A/edit?gid=1989857755#gid=1989857755">Gantt Chart</a>
+<h2>Contribution Table</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Proposal Contributions</th>
+    <th>Midterm Contributions</th>
+  </tr>
+  <tr>
+    <td> Francesco Cascone </td>
+    <td> Gathering References, Writing the Report</td>
+    <td> Preprocessing and Visualizing Data </td>
+  </tr>
+  <tr>
+    <td> William Hudson </td>
+    <td> Video Presentation</td>
+    <td> Github Pages, Prediction Analysis </td>
+  </tr>
+  <tr>
+    <td> Viabhav Patel </td>
+    <td> Gathering References, Writing the Report</td>
+    <td> Preprocessing Data, Running Random Forests, Running DNN </td>
+  </tr>
+  <tr>
+    <td> Matthew Spenney </td>
+    <td> Github Repository, Github Pages</td>
+    <td> Github Pages, Prediction Analysis </td>
+  </tr>
+  <tr>
+    <td> Jonathan Zhang </td>
+    <td> Writing the Report</td>
+    <td> Running Random Forests </td>
+  </tr>
+</table>
+</body>
+</html>
