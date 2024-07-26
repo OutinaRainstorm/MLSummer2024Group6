@@ -92,50 +92,29 @@
 <h2>4) Results and Discussion</h2>
 <p>
   &emsp; a) Results from Supervized Learning algorithms <br>
-  &emsp;  &emsp;  i) &emsp;Random Tree Regression<br>
+  &emsp;  &emsp;  i) &emsp;Direct Approach Results<br>
   &emsp;&emsp;&emsp;  &emsp; As shown in the visualization, running Random Forest Regression on the testing<br>
-  &emsp;&emsp;&emsp;  &emsp; flights caused the model to predict the flight price would stay around the same<br>
-  &emsp;&emsp;&emsp;  &emsp; price. This is not a helpful prediction because it is not picking up the changes<br>
-  &emsp;&emsp;&emsp;  &emsp; in price we see for individual flights. This is happening because ticket prices<br>
-  &emsp;&emsp;&emsp;  &emsp; with respect to days till departure follows a different function for each flight.<br>
-  &emsp;&emsp;&emsp;  &emsp; The prices for some flights increase, while the price for other flights decrease, so<br>
-  &emsp;&emsp;&emsp;  &emsp; the algorithm tries to optimize this behavior by predicting the price at the average.<br>
-  &emsp;&emsp;&emsp;  &emsp; Our R^2 value is: -0.02, our (non-normalized) MSE is 2919, or in other words the typical error<br>
-  &emsp;&emsp;&emsp;  &emsp; is 54 dollars. <br>
 
   
-  &emsp;  &emsp; ii) &emsp;Deep Neural Network<br>
+  &emsp;  &emsp; ii) &emsp;Iterative Architecture and Iterative with Soft-clustering Results<br>
   &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
-  &emsp;&emsp;&emsp;  &emsp; Overall the model was able to quickly converge with a fairly stagnant training loss<br>
-  &emsp;&emsp;&emsp;  &emsp; after very few epochs a certain complexity of model, and deep neural networks are able to present <br>
-  &emsp;&emsp;&emsp;  &emsp;Overall the validation error shows that the issue being faced <br>
-  &emsp;&emsp;&emsp;  &emsp;is not under/over fitting, rather that the issue is inherent <br>
-  &emsp;&emsp;&emsp;  &emsp; to the methodology and the problem being faced.<br>
-  &emsp;&emsp;&emsp;  &emsp; Our R^2 is 0.01, MSE (non-normalized) is 2837 so our values vary by about 53 dollars.<br>
-  &emsp;&emsp;&emsp;  &emsp;The accuracy score within $30, as for the Random Tree Regression, was 0.367.<br><br>
+  &emsp;  &emsp; iii) &emsp;Comparison and Conclusions<br>
+  &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
   &emsp;  &emsp;  b) &emsp;Next Steps<br>
   &emsp;&emsp;&emsp;  &emsp;These results suggest that we should attempt a different approach. Rather <br>
-  &emsp;&emsp;&emsp;  &emsp;than producing a model predicts the ticket price given only the number of days <br>
-  &emsp;&emsp;&emsp;  &emsp;in advance of the ticket purchase, we will try to produce a model that can  <br>
-  &emsp;&emsp;&emsp;  &emsp;predict the rest of the distribution of ticket prices given some of the data. <br>
-  &emsp;&emsp;&emsp;  &emsp;That is, we want to create a model trained on a subset of the 95 flight distributions <br>
-  &emsp;&emsp;&emsp;  &emsp;that can predict a new flight distribution based on some information about the new <br>
-  &emsp;&emsp;&emsp;  &emsp;flight distribution. For example, given the ticket prices of a new flight for, say, <br>
-  &emsp;&emsp;&emsp;  &emsp;35-57 days in advance, the model should be able to predict how the rest of the <br>
-  &emsp;&emsp;&emsp;  &emsp;distribution will look like with certain probability.  <br>
- <br>
-  &emsp;&emsp;&emsp;  &emsp;This would still be practical for a customer that tracks flight  <br>
-  &emsp;&emsp;&emsp;  &emsp;prices 35-57 days in advance (which could be done with a web scraper)  <br>
-  &emsp;&emsp;&emsp;  &emsp;as they could obtain a prediction for when the prices would be cheapest. <br>
-  &emsp;&emsp;&emsp;  &emsp;The customer could even run the model every day, feeding it one more data <br>
-  &emsp;&emsp;&emsp;  &emsp;point every successive day which would enable a more accurate prediction <br>
 
-<h2>Visualiztion of Random Tree Predicted Prices Compared to original</h2>
+<h2>Visualiztion of Direct, RFR</h2>
 <img src="./randomForest.png" title="Random Tree Prediction"><br>
-  
-<h2>Visualization for DNN Model</h2>
-<img src="./DNN_2Results.png" title="DNN Visualization"><br>
-<img src="./DNN_2Loss.png" title="DNN Loss during Optimization">
+<h2>Visualiztion of Direct, MLP</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
+<h2>Visualiztion of Direct, Lasso</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
+<h2>Visualiztion of Iterative, RFR</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
+<h2>Visualiztion of Iterative, MLP</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
+<h2>Visualiztion of Iterative, RFR</h2>
+<img src="./randomForest.png" title="Random Tree Prediction"><br>
 </p>
 <h2>5) References</h2>
 <p>
