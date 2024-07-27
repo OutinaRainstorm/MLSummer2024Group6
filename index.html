@@ -29,52 +29,57 @@
   &emsp;&emsp;&emsp;  &emsp;prediction accuracy. They found that the bagging regression <br>
   &emsp;&emsp;&emsp;  &emsp;tree model had the highest accuracy of 87.42%. <br>
   &emsp; b) Dataset Description <br>
-  &emsp; &emsp;   i)&emsp;The data will contain prices of flights over time, consisting <br>
-  &emsp;&emsp;&emsp;  &emsp;of fixed destinations and dates. The data contains information <br>
-  &emsp;&emsp;&emsp;  &emsp;for United Airfare flight SFO-LAX <br>
+  &emsp; &emsp;   i)&emsp;The data contains ticket prices of 95 flights with route SFO-LAX <br>
+  &emsp;&emsp;&emsp;  &emsp;from Oct 11 2023 to Oct 20 2023. There are 57 prices provided for <br>
+  &emsp;&emsp;&emsp;  &emsp;each of the 95 flights, corresponding to the number of days before <br>
+  &emsp;&emsp;&emsp;  &emsp;departure that the flight had sold for.<br>
   &emsp; c) Dataset Link: <a href="https://www.kaggle.com/code/andrewrliu/airfare-predictor-pt-1/input">Airfare Predictor (pt.1)</a>
 </p>
 <h2>2) Problem Description and Motivation</h2>
 <p>
-  The distribution of flight prices is inherently non-linear and does not follow an easily predictable distribution. The goal of this paper is to create a machine learning approach to the problem of the distributions of ticket flight prices when given partial information about the distribution. In other words, by giving an earlier part of the distribution, the latter part of the distribution will be predicted allowing for educated choices on when to purchase a flight ticket at the cheapest time.
+  The distribution of flight prices is inherently non-linear and does not follow an easily predictable <br>
+  distribution. The goal of this paper is to create a machine learning approach to the problem of the <br>
+  distributions of ticket flight prices when given partial information about the distribution. In other words, <br>
+  by giving an earlier part of the distribution, the latter part of the distribution will be predicted allowing <br>
+  for educated choices on when to purchase a flight ticket at the cheapest time. We will provide the models with <br>
+  ticket prices for 14-57 (44 total days), 25-57 (33 total days), and 36-57 (22 total days) days before departure <br>
+  for 76 of the 95 flights (80% of the flights). 
 
 </p>
 <h2>3) Methods</h2>
 <p>
-  &emsp; a) Preprocessing methods <br>
+  &emsp; a) 1+ Preprocessing methods <br>
   &emsp; &emsp;   i)&emsp; Visualization<br>
   &emsp;&emsp;&emsp;  &emsp; For each flight, a data point was created containing a column of ticket prices<br>
   &emsp;&emsp;&emsp;  &emsp; and a column containing the number of days. This matrix was used to create a<br>
   &emsp;&emsp;&emsp;  &emsp; scatterplot of prices over different number of days befor the plane's departure<br>
   &emsp; &emsp;ii) &emsp; Removing Outliers<br>
-  &emsp;&emsp;&emsp;  &emsp; After visualizing the data, some of the scatterplots showed signs of outliers.<br>
-  &emsp;&emsp;&emsp;  &emsp; Most of these outliers were located in the couple of days leading up to each <br>
-  &emsp;&emsp;&emsp;  &emsp; flight. Consequently, we decided to remove the data one and two days in <br>
-   &emsp;&emsp;&emsp;  &emsp; advance for each flight.This left us with 55 data points for each of the 95 flights.<br>
+  &emsp;&emsp;&emsp;  &emsp; After visualizing the data, some of the scatter plots showed signs of outliers. <br>
+  &emsp;&emsp;&emsp;  &emsp; Most of these outliers were located in the couple of days leading up to each flight. <br>
+  &emsp;&emsp;&emsp;  &emsp; Consequently, we decided to remove the data one and two days in advance for each flight. <br>
+  &emsp;&emsp;&emsp;  &emsp; This left us with 55 data points (3-57 days before departure) for each of the 95 flights.<br>
   <!--<h2>Flight Price with Respect to Days Before Departure</h2><br>
   <img src="./docs/assets/css/Screenshot_3-7-2024_8394_colab.research.google.png" title="Data vs. Processed Data" width="75%" height="75%"><br><br>-->
-  &emsp; b) Supervised Learning methods <br>
+  &emsp; b) 3+ Algorithms/Models <br>
   &emsp;  &emsp;  i) &emsp;Direct Architecture<br>
-  &emsp;&emsp;&emsp;  &emsp; This architecture takes the direct approach to the problem, taking each of the days  <br>
-  &emsp;&emsp;&emsp;  &emsp; inside of the prior distribution as a feature to predict the remaining days inside of the  <br>
-  &emsp;&emsp;&emsp;  &emsp; distribution as an output. Thus if one wished to predict the distribution using the <br>
-  &emsp;&emsp;&emsp;  &emsp; information up to 33 days from the flight, then each one of those 22 days will be a  <br>
-  &emsp;&emsp;&emsp;  &emsp; feature, with 31 outputs. This approach however suffers from the fact that with only 95  <br>
-  &emsp;&emsp;&emsp;  &emsp; data points in total there exists a great deal of features compared to data points. In this   <br>
-  &emsp;&emsp;&emsp;  &emsp; implementation various different algorithms were attempted with those being Multi-level    <br>
-  &emsp;&emsp;&emsp;  &emsp; perceptron regressor, Random Forest Regressor, and Linear Regression with polynomial    <br>
-  &emsp;&emsp;&emsp;  &emsp; features and Lasso regularization.    <br>
+  &emsp;&emsp;&emsp;  &emsp; This architecture takes the direct approach to the problem, taking each of the days inside <br>
+  &emsp;&emsp;&emsp;  &emsp; of the prior distribution as a feature to predict the remaining days inside of the distribution <br>
+  &emsp;&emsp;&emsp;  &emsp; as an output. Thus if one wished to predict the distribution given prices for 25-57 days before <br>
+  &emsp;&emsp;&emsp;  &emsp; departure, then each one of those 33 days will be a feature, with 22 outputs (3-24 days before departure). <br>
+  &emsp;&emsp;&emsp;  &emsp; This approach however suffers from the fact that with only 95 total flights, there are a great deal of <br>
+  &emsp;&emsp;&emsp;  &emsp; features compared to data points. In this implementation various different algorithms were attempted with <br>
+  &emsp;&emsp;&emsp;  &emsp; those being Multi-level perceptron regressor, Random Forest Regressor, and Linear Regression with polynomial <br>
+  &emsp;&emsp;&emsp;  &emsp; features and Lasso regularization. <br>
   &emsp;  &emsp; ii) &emsp;Iterative Architecture<br>
-  &emsp;&emsp;&emsp;  &emsp; This architecture attempts to understand the relationships between the points in an<br>
-  &emsp;&emsp;&emsp;  &emsp; iterative manner, by the assumption that if one has the prices from days 33 to 55, then <br>
-  &emsp;&emsp;&emsp;  &emsp; predicting the price on day 32 would be ‘easier’ compared to predicting the entire <br>
-  &emsp;&emsp;&emsp;  &emsp; distribution at one time. Thus this approach trains multiple models with a step of 1 day <br>
-  &emsp;&emsp;&emsp;  &emsp; until reaching the endpoint (day 3), progressively increasing the number of days in the X <br>
-  &emsp;&emsp;&emsp;  &emsp; set in the form of adding a new feature. Overall this architecture has the major drawback <br>
-  &emsp;&emsp;&emsp;  &emsp; of requiring a different model to understand the relationship between each point and the <br>
-  &emsp;&emsp;&emsp;  &emsp; points prior to it, which can make this approach much more expensive compared to the <br>
-  &emsp;&emsp;&emsp;  &emsp; direct approach. In the implementation of this architecture Random Forest Regressor<br>
-  &emsp;&emsp;&emsp;  &emsp; and Multi-level perceptron versions were used.<br>
+  &emsp;&emsp;&emsp;  &emsp; This architecture attempts to understand the relationships between the points in an iterative <br>
+  &emsp;&emsp;&emsp;  &emsp; manner. For example, in order to predict the distribution given prices for 25-57 days before <br>
+  &emsp;&emsp;&emsp;  &emsp; departure, it would be ‘easier’ to predict the price at 24 days before departure rather than <br>
+  &emsp;&emsp;&emsp;  &emsp; predicting the entire distribution at once. Thus this approach trains multiple models with a step <br>
+  &emsp;&emsp;&emsp;  &emsp; of 1 day until reaching the endpoint (3 days before departure), progressively increasing the number <br>
+  &emsp;&emsp;&emsp;  &emsp; of days in the X set in the form of adding a new feature. Overall this architecture has the major drawback <br>
+  &emsp;&emsp;&emsp;  &emsp; of requiring a different model to understand the relationship between each point and the points prior to it, <br>
+  &emsp;&emsp;&emsp;  &emsp; which can make this approach much more expensive compared to the direct approach. In the implementation of <br>
+  &emsp;&emsp;&emsp;  &emsp; this architecture Random Forest Regressor and Multi-level perceptron versions were used. <br>
    &emsp;  &emsp; iii) &emsp;Iterative Architecture with Soft-Clustering<br>
   &emsp;&emsp;&emsp;  &emsp; This architecture uses the iterative architecture, however in addition to each model there <br>
   &emsp;&emsp;&emsp;  &emsp; is an unsupervised soft-classification scheme (Gaussian Mixture Model in this case) <br>
@@ -91,6 +96,8 @@
 </p>
 <h2>4) Results and Discussion</h2>
 <p>
+  Accuracy measures the percentage of predicted prices that are within $30 from the actual price for all <br>
+  19 tested flights. <br>
   &emsp; a) 44 point split <br>
   &emsp;  &emsp;  i) &emsp;Direct Approach Results<br>
   &emsp;  &emsp; &emsp;  1) &emsp;MLP<br>
@@ -193,10 +200,7 @@
   
   <img src="./docs/assets/css/22/igmm81.png" title="MLP4481"><br>
   <img src="./docs/assets/css/22/igmm87.png" title="MLP4481"><br>
-  &emsp;  d) Comparison and Conclusions<br>
-  &emsp;&emsp;&emsp;  &emsp; The neural network predicted a similar result to the Random Tree Regression.<br>
-  
-  &emsp; e) Next Steps<br>
+  &emsp; b) Next Steps<br>
   &emsp;&emsp; &emsp;The next steps are primarily with optimizing the individual architectures involved. For <br>
   &emsp;&emsp; &emsp;most of them pre-defined hyper-parameters such as max_iters, and learning rate were  <br>
   &emsp;&emsp; &emsp;not experimented with to find which results in the best accuracy. In addition, more flights   <br>
@@ -204,6 +208,25 @@
   &emsp;&emsp; &emsp;expansive dataset. In addition, especially for scenarios where there are not many days     <br>
   &emsp;&emsp; &emsp;left to predict inside of the distribution, feature reduction might be undertaken to prevent      <br>
   &emsp;&emsp; &emsp;the model from overfitting and only use the most important features inside of the dataset.     <br>
+
+  &emsp; c) Analysis <br>
+  &emsp;&emsp; &emsp;The primary drawback encountered was a decrease in accuracy and an increase in error for <br>
+  &emsp;&emsp; &emsp;all the iterative models as the number of days in advance given to them decreased which makes <br>
+  &emsp;&emsp; &emsp;sense given that an error in one of the early points would lead to a cascading error further <br>
+  &emsp;&emsp; &emsp;down the line. Overall, while theoretically interesting, the iterative approach with soft-clustering <br>
+  &emsp;&emsp; &emsp;proved to be underwhelming, scoring worse than the iterative approach with random forest thus meaning <br>
+  &emsp;&emsp; &emsp;that with similar datasets this approach should not be tried with our data. <br> <br>
+  &emsp;&emsp; &emsp;For iterative results, random forest proved to be universally the best in both MSE and <br>
+  &emsp;&emsp; &emsp;accuracy compared to the MLP regressor, especially when given less days in advance. For direct <br>
+  &emsp;&emsp; &emsp;results, lasso proved to be consistently the worst, however got more accurate as it was given <br>
+  &emsp;&emsp; &emsp;less days in advance, likely speaking to overfitting that may have occurred with the deluge of <br>
+  &emsp;&emsp; &emsp;features that the model is given when there are very few days left to predict. Overall for the <br>
+  &emsp;&emsp; &emsp;direct approach the MLP regressor was able to have the best MSE, and comparable or better results <br>
+  &emsp;&emsp; &emsp;compared to random forest. The direct approach seemed more resilient than the iterative approach when <br>
+  &emsp;&emsp; &emsp;it comes to changing the number of days provided, however unlike the iterative approaches, one must <br>
+  &emsp;&emsp; &emsp;re-train a direct approach model, rather than use the existing model reducing the flexibility of <br>
+  &emsp;&emsp; &emsp;application.
+
 
 </p>
 <h2>5) References</h2>
